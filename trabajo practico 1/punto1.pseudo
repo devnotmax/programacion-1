@@ -1,0 +1,37 @@
+Entradas: pesoPaquete: entero [MF = 0]
+Salidas: cantidadPaquetes: entero pesoTotalCargado: real
+Constantes: capacidadMaxima: natural
+Variables auxiliares: capacidadRestante: entero, pesoSuperado: real
+
+A0 Inicializar  
+A1 procesarPaquetes()
+A2 Escribir("Paquetes cargados:", cantidadPaquetes)
+A4 Escribir("Peso total cargado: ", pesoTotalCargado)
+A3 Parar
+
+A0 Inicializar
+    cantidadPaquetes <- 0
+    pesoSuperado <- 0
+    capacidadMaxima <- 120 // medido en kg
+    capacidadRestante <- capacidadMaxima
+    pesoTotalCargado <- 0
+    
+
+A1 procesarPaquetes
+    leer(pesoPaquete)
+    mientras (pesoPaquete > 0)
+        si (capacidadRestante < pesoPaquete) Entonces
+            pesoSuperado <- pesoPaquete - capacidadRestante
+            Escribir("El paquete no se puede cargar porque tiene un exceso: ", pesoSuperado)
+        Sino
+            //cargar paquete
+            cantidadPaquetes <- cantidadPaquetes + 1
+            capacidadRestante <- capacidadRestante - pesoPaquete
+            pesoTotalCargado <- pesoTotalCargado + pesoPaquete
+        fin_si
+
+        leer(pesoPaquete)
+    Fin_mientras
+
+
+    
