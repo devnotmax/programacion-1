@@ -1,0 +1,51 @@
+Algoritmo oraciones
+Entradas: char: caracter (MF = '.'), repetida, inicia: caracter
+Salidas: long_oracion, cant_vocales, cant_veces, cant_palabras, cant_inician: Entero
+Variables auxiliares: en_palabra: booleano, resultado: booleano, anterior: caracter
+
+A0 Inicializar
+    cant_vocales <- 0
+    cant_veces <- 0
+    cant_palabras <- 0
+    cant_inician <- 0
+    en_palabra <- falso
+    anterior <- ' '
+    long_oracion <- 0
+
+A1 procesarCaracteres
+    Leer(char)
+    Leer(repetida)
+    Leer(inicia)
+
+    Mientras (char <> '.')
+        long_oracion <- long_oracion + 1
+        resultado <- es_vocal(char)
+
+        si (resultado = verdadero) entonces
+            cant_vocales <- cant_vocales + 1
+        Fin_si
+
+        si (char = repetida) entonces
+            cant_veces <- cant_veces + 1
+        Fin_si
+
+        si (anterior = ' ' & char <> ' ' & char <> '.' & char <> ',') entonces //El tema de los signos de puntuacion no se como hacerlo
+            cant_palabras <- cant_palabras + 1
+            en_palabra <- verdadero
+
+            si (char = inicia) entonces
+                cant_inician <- cant_inician + 1
+            Fin_si
+        Fin_si
+
+        anterior <- char
+        Leer(char)
+    Fin_Mientras
+
+A2 Escribir("Longitud de la oración: ", long_oracion)
+A3 Escribir("Cantidad de vocales: ", cant_vocales)
+A4 Escribir("Cantidad de veces que aparece el caracter repetido: ", cant_veces)
+A5 Escribir("Cantidad de palabras: ", cant_palabras)
+A6 Escribir("Cantidad de palabras que inician con el caracter: ", cant_inician)
+A7 Parar
+
