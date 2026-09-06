@@ -1,0 +1,39 @@
+algoritmo identificarVocal
+Entrada: char: caracter
+Salida: mensaje: cadena caracteres
+variable auxiliar: resultado: booleano
+
+Funcion es_vocal (c: caracter) -> booleano
+    segun (c)
+        'A': retornar verdadero
+        'a': retornar verdadero
+        'E': retornar verdadero
+        'e': retornar verdadero
+        'I': retornar verdadero
+        'i': retornar verdadero
+        'O': retornar verdadero
+        'o': retornar verdadero
+        'U': retornar verdadero
+        'u': retornar verdadero
+    Sino
+        retornar falso
+    fin_segun
+fin_Funcion
+
+A0 Inicializar
+    mensaje <- ""
+
+A1 procesarCaracter
+    Leer(caracter)
+    resultado <- es_vocal(caracter)
+    si (resultado = verdadero) entonces
+        mensaje <- "El caracter es una vocal."
+    sino
+        mensaje <- "El caracter no es una vocal."
+    Fin_si
+
+A2 Escribir(mensaje)
+A3 Parar
+
+
+    
