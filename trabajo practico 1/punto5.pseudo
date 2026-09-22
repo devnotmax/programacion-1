@@ -1,0 +1,74 @@
+algoritmo validarNombreUsuario
+Entradas: caracter: Caracter
+Salidas: longitud: Entero
+variables auxiliares: tieneMayuscula, tieneNumero, tieneEspecial: booleano
+
+funcion esMayuscula(c): Caracter -> booleano
+    si (c >= 'A' & c <= 'Z') entonces
+        esMayuscula <- verdadero
+    sino
+        esMayuscula <- falso
+    fin_si
+fin_funcion
+
+funcion esNumero(c): Caracter -> booleano
+    si (c >= '0' & c <= '9') entonces
+        esNumero <- verdadero
+    sino
+        esNumero <- falso
+    fin_si
+fin_funcion
+
+funcion esEspecial(c): Caracter -> booleano
+    // El enunciado dice que solo consideremos '@', '_' y '-' asi que entiendo que esto deberia estar bien
+    si (c = '@' | c = '_' | c = '-') entonces
+        esEspecial <- verdadero
+    sino
+        esEspecial <- falso
+    fin_si
+fin_funcion
+
+procedimiento validarUsuario(long, mayus, num, esp): Entero, booleano, booleano, booleano
+    si (long >= 6 & mayus = verdadero & num = verdadero & esp = verdadero) entonces
+        Escribir("El nombre de usuario es VALIDO")
+    sino
+        Escribir("El nombre de usuario es INVALIDO")
+    fin_si
+fin_procedimiento
+
+A0 Inicializar
+A1 procesarCaracteres
+A2 mostrarResultados
+A3 Parar
+
+A0 Inicializar
+    longitud <- 0
+    tieneMayuscula <- falso
+    tieneNumero <- falso
+    tieneEspecial <- falso
+
+A1 procesarCaracteres
+    Leer(caracter)
+    
+    Mientras (caracter <> '.')
+        longitud <- longitud + 1
+        
+        si (esMayuscula(caracter) = verdadero) entonces
+            tieneMayuscula <- verdadero
+        fin_si
+        
+        si (esNumero(caracter) = verdadero) entonces
+            tieneNumero <- verdadero
+        fin_si
+        
+        si (esEspecial(caracter) = verdadero) entonces
+            tieneEspecial <- verdadero
+        fin_si
+        
+        Leer(caracter)
+    Fin_mientras
+
+A2 mostrarResultados
+    Escribir("La longitud del nombre elegido es: ", longitud)
+    // Le pasamos la información recopilada al procedimiento para que defina y muestre el mensaje
+    validarUsuario(longitud, tieneMayuscula, tieneNumero, tieneEspecial)
