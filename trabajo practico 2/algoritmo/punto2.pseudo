@@ -1,0 +1,21 @@
+algoritmo ventaEntradas
+entradas: codigo: caracter, cantidadEntradas: entero
+salidas: importeTotal: real
+
+A0 inicializar 
+    importeTotal <- 0
+
+A1 procesarEntradas
+    leer(codigo)
+    leer(cantidadEntradas)
+    segun (codigo)
+        G: importeTotal <- cantidadEntradas * 8000
+        E: importeTotal <- cantidadEntradas * 5000
+        J: importeTotal <- cantidadEntradas * 4000
+    sino
+        importeTotal <- 0
+        Escribir("Error codigo invalido")
+    Fin_segun
+
+A2 Escribir("Precio final: ", importeTotal)
+

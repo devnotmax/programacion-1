@@ -1,0 +1,83 @@
+algoritmo evaluacionPH
+Entradas: lectura1, lectura2, lectura3: Real, tipoMuestra: Entero
+Salidas: // Solo mensajes por pantalla
+Variables auxiliares: promedio, limInf, limSup: Real, muestraValida: booleano
+Constantes: 
+    aguaMin = 6.5
+    aguaMax = 8.5
+    sueloAgMin = 5.5
+    sueloAgMax = 7.5
+    alimentoAcMin = 4.0
+    alimentoAcMax = 7.0
+
+A0 Inicializar
+A1 procesarMuestra
+A2 Parar
+
+A0 Inicializar
+    muestraValida <- verdadero
+    promedio <- 0
+    limInf <- 0
+    limSup <- 0
+
+A1 procesarMuestra
+    leer(lectura1)
+    leer(lectura2)
+    leer(lectura3)
+
+    // Validación de que ninguna lectura esté fuera del rango 0 a 14
+    si (lectura1 < 0 | lectura1 > 14 | lectura2 < 0 | lectura2 > 14 | lectura3 < 0 | lectura3 > 14) entonces
+        Escribir("Error: lectura fuera del intervalo (0 a 14)")
+    sino
+        Leer(tipoMuestra)
+
+        promedio <- (lectura1 + lectura2 + lectura3) / 3.0
+
+        // Asignación de límites según el tipo de muestra
+        segun (tipoMuestra)
+            1: //agua potable
+                limInf <- aguaMin
+                limSup <- aguaMax
+            2: //suelo agrícola
+                limInf <- sueloAgMin
+                limSup <- sueloAgMax
+            3: //alimento ácido
+                limInf <- alimentoAcMin
+                limSup <- alimentoAcMax
+            sino:
+                Escribir("Error: tipo de muestra invalido")
+                muestraValida <- falso
+        fin_segun
+
+        // Si la muestra es válida, se procede con la evaluación
+        si (muestraValida = verdadero) entonces
+            Escribir("pH promedio: ", promedio)
+            Escribir("Rango: ", limInf, " - ", limSup)
+            Escribir("Estado: ")
+            
+            // Evaluación de los rangos y alertas
+            si (promedio >= limInf & promedio <= limSup) entonces
+                Escribir("- Dentro del rango")
+                
+                si ((promedio - limInf < 0.2) | (limSup - promedio < 0.2)) entonces
+                    Escribir("- Cerca del limite")
+                fin_si
+                
+            sino
+                si (promedio < limInf) entonces
+                    Escribir("- Por debajo del rango")
+                    
+                    si (limInf - promedio > 1.0) entonces
+                        Escribir("- Alerta prioritaria")
+                    fin_si
+                    
+                sino
+                    Escribir("- Por encima del rango")
+                    
+                    si (promedio - limSup > 1.0) entonces
+                        Escribir("- Alerta prioritaria")
+                    fin_si
+                fin_si
+            fin_si
+        fin_si
+    fin_si

@@ -1,0 +1,23 @@
+algoritmo resultadoEvaluacion
+Entradas: nota: entero
+Salidas: resultado: cadena;
+
+A0 inicializar
+    resultado <- " "
+
+A1 evaluarNota
+    leer(nota)
+    si (nota >= 0) entonces
+        si (nota <= 3) entonces
+            resultado <- "Desaprobado"
+        sino si (nota <= 6) entonces
+            resultado <- "Aprobado"
+        sino si (nota >= 7 & nota <= 10) entonces
+            resultado <- "Promocionado"
+        sino
+            resultado <- "Valor invalido: Fuera del intervalo"
+        fin_si
+    fin_si
+
+A2 escribir(resultado)
+A3 Parar

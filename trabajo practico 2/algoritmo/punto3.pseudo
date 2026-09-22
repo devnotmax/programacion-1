@@ -1,0 +1,73 @@
+algoritmo aguasDelValle
+Entradas: consumo: real, categoria, metodo: caracter
+Salidas: subtotalSinIva, subtotal, total: real
+Variables auxiliares: consumoRestante: real
+Constantes: 
+            -Iva = 1.21
+            -CargoFijoHogar = 1200
+            -CargoFijoComercio = 3000
+            -CargoFijoIndustria = 7500
+            -FondoAmbiental = 1.02
+
+A0 inicializar
+A1 calcularTarifa
+A2 ajustarTarifa
+A3 informarTarifa
+A4 parar
+
+A0 inicializar
+    subtotalSinIva <- 0
+    subtotal <- 0
+    total <- 0
+
+A1 calcularTarifa
+    leer(consumo)
+    leer(categoria)
+    consumoRestante <- consumo
+
+    segun (categoria)
+        'H':  subtotalSinIva <- subtotalSinIva + CargoFijoHogar
+            si (consumo > 20) entonces
+                consumoRestante <- consumo - 20
+                subtotalSinIva <- subtotalSinIva + (20 * 45) + (consumoRestante * 70)
+            sino
+                subtotalSinIva <- subtotalSinIva + (consumo * 45)
+            fin_si
+
+        'C':  subtotalSinIva <- subtotalSinIva + CargoFijoComercio
+            si (consumo > 50) entonces
+                consumoRestante <- consumo - 50
+                subtotalSinIva <- subtotalSinIva + (50 * 60) + (consumoRestante * 95) 
+            sino
+                subtotalSinIva <- subtotalSinIva + (consumo * 60)
+            fin_si
+
+        'I': subtotalSinIva <- subtotalSinIva + CargoFijoIndustria + (consumo * 130)
+    sino
+        Escribir("Error: Categoría inválida")
+    fin_segun
+
+A2 ajustarTarifa
+    leer(metodo)
+    //Fondo ambiental
+    si (consumo > 120) entonces
+        subtotalSinIva <- subtotalSinIva * FondoAmbiental
+    fin_si
+
+    //Iva
+    subtotal <- subtotalSinIva * Iva
+
+    //Metodo de pago
+    segun (metodo)
+        E: total <- subtotal * 0.96
+        T: total <- subtotal * 1.015
+        D: total <- subtotal
+    sino
+        Escribir("Error: Método de pago inválido")
+    fin_si
+
+A3 informarTarifa
+    Escribir("Subtotal (sin IVA): $", subtotalSinIVa)
+    Escribir("Subtotal con IVA (21%): $", subtotal)
+    Escribir("Total a pagar: $", total)
+

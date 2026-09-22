@@ -1,0 +1,118 @@
+algoritmo validarFecha
+Entradas: dia, mes, año: Entero
+variables auxiliares: fechaValida, esBisiesto, mesValido, año, diaValido: booleano
+
+A0 inicializar
+A2 validarDatos
+A3 mostrarResultados
+A4 Parar
+
+A0 inicializar
+    fechaValida <- falso
+    esBisiesto <- falso
+    mesValido <- falso
+    añoValido <- falso
+    diaValido <- falso
+
+A2 validarDatos
+    leer(dia)
+    leer(mes)
+    leer(año)
+
+    si (año % 400 = 0 | (año % 4 = 0 & año % 100 <> 0)) entonces
+        esBisiesto <- verdadero
+    sino
+        esBisiesto <- falso
+    fin_si
+
+    si (mes >= 1 & mes <= 12) entonces
+        mesValido <- verdadero
+    sino
+        Escribir("Error: Mes invalido")
+    fin_si
+
+    si (año >= 1) entonces
+        añovalido <- verdadero
+    sino
+        Escribir("Error: año invalido")
+    fin_si
+
+    segun (mes)
+        1, 3, 5, 7, 8, 10, 12:
+            si (dia >= 1 & dia <= 31) entonces
+                diaValido <- verdadero
+            sino
+                Escribir("Error: El mes ", mes, " tiene 31 dias")
+            fin_si
+            
+        2:
+            si (esBisiesto = verdadero) entonces
+                si (dia >= 1 & dia <= 29) entonces
+                    diaValido <- verdadero
+                sino
+                    Escribir("Error: El mes 2 tiene 29 dias y el año ", año, " es bisiesto")
+                fin_si
+            sino
+                si (dia >= 1 & dia <= 28) entonces
+                    diaValido <- verdadero
+                sino
+                    Escribir("Error: El mes 2 tiene solo 28 dias porque el año que ingresaste no es bisiesto")
+                fin_si
+            fin_si
+            
+        4, 6, 9, 11:
+            si (dia >= 1 & dia <= 30) entonces
+                diaValido <- verdadero
+            sino
+                Escribir("Error: El mes ", mes, " solo tiene 30 dias.")
+            fin_si
+    fin_segun
+
+    si (diaValido = verdadero & mesValido = verdadero & añovalido = verdadero) entonces
+        fechaValida <- verdadero
+    sino
+        fechaValida <- falso
+    fin_si
+
+A3 mostrarResultados
+    si (fechaValida = verdadero) entonces
+        Escribir("Resultado: Fecha valida")
+        Escribir("Fecha: ", dia, "/", mes, "/", año)
+
+        // año bisiesto
+        si (esBisiesto = verdadero) entonces
+            Escribir("Año bisiesto: SI")
+        sino
+            Escribir("Año bisiesto: NO")
+        fin_si
+
+        // evaluar trimestre
+        segun (mes)
+            1, 2, 3:
+                Escribir("Trimestre: T1")
+            4, 5, 6:
+                Escribir("Trimestre: T2")
+            7, 8, 9:
+                Escribir("Trimestre: T3")
+            10, 11, 12:
+                Escribir("Trimestre: T4")
+        fin_segun
+
+        // evaluar invierno
+        si (mes = 7 | mes = 8) entonces
+            Escribir("Invierno: SI")
+        sino 
+            si (mes = 6 & dia >= 21) entonces
+                Escribir("Invierno: SI")
+            sino 
+                si (mes = 9 & dia <= 20) entonces
+                    Escribir("Invierno: SI")
+                sino
+                    Escribir("Invierno: NO")
+                fin_si
+            fin_si
+        fin_si
+        
+    sino
+        Escribir("Resultado: Fecha invalida")
+    fin_si
