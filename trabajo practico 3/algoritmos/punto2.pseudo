@@ -1,0 +1,33 @@
+algoritmo colectaSolidaria
+Entradas: montoDeseado, aporte: real
+Salidas: cantidadAportes: entero, mayorAporte, totalRecaudado: real
+Variables auxiliares: aportesRestante: real
+
+A0 inicializar
+A1 procesarAportes
+A2 informeAportes
+A3 parar
+
+A0 inicializar
+    cantidadAportes <- 0
+    mayorAporte <- 0.00
+    totalRecaudado <- 0.00
+    aportesRestantes <- 0
+
+A1 procesarAportes
+    leer(montoDeseado)
+    leer(aporte)
+    mientras (aportesRestantes < montoDeseado) hacer
+        cantidadAportes <- cantidadAportes + 1
+        si (aporte > mayorAporte) entonces
+            mayorAporte <- aporte
+        fin_si
+        totalRecaudado <- totalRecaudado + aporte
+        aportesRestantes <- aportesRestantes + aporte
+        leer(aporte)
+    fin_mientras
+
+A2 informeAportes
+    escribir(cantidadAportes)
+    escribir(mayorAporte)
+    escribir(totalRecaudado)

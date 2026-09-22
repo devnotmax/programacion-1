@@ -1,0 +1,52 @@
+algoritmo analizandoNumero
+Entradas: numero: entero
+Salidas: longitud, cantidadPrimos, sumaPrimos, sumaImpares: entero
+Variables auxiliares: aux, i, digito: entero, esPrimo: booleano
+
+A0 Inicializar
+A1 procesarNumero
+A2 mostrarResultados
+A3 Parar
+
+A0 Inicializar
+    longitud <- 0
+    cantidadPrimos <- 0
+    sumaPrimos <- 0
+    sumaImpares <- 0
+    i <- 2
+
+A1 procesarNumero
+    leer(numero)
+    aux <- numero
+    mientras (aux <> 0) hacer
+        digito <- aux % 10;
+        esPrimo <- verdadero //verdadero hasta que se demuestre lo contrario?
+        longitud <- longitud + 1
+
+        si(digito < 2) entonces
+            esPrimo <- falso
+        sino
+            hacer i ...... (digito - 1) veces
+                si (digito % i = 0) entonces
+                    esPrimo <- falso
+                fin_si
+            fin_hacer
+        fin_si
+
+        si(esPrimo = verdadero) entonces
+            cantidadPrimos <- cantidadPrimos + 1
+            sumaPrimos <- sumaPrimos + digito
+        fin_si
+
+        si (digito % 2 <> 0) entonces
+            sumaImpares <- sumaImpares + digito
+        fin_si
+
+        aux <- aux / 10
+    fin_mientras
+
+A2 mostrarResultados
+    escribir(longitud)
+    escribir(cantidadPrimos)
+    escribir(sumaPrimos)
+    escribir(sumaImpares)

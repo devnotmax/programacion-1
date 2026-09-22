@@ -1,0 +1,91 @@
+algoritmo palabrasMas
+Entradas: caracter: caracter
+Salidas: cantidadPalabras, longitudMasLarga, longitudMasCorta: enteros; promedioCaracPorPalabra, porcentEspacios: real
+Variables auxiliares: longitudActual, cantidadEspacios, cantidadLetras, totalCaracteres: enteros; errorEncontrado: booleano
+
+A0 Inicializar
+A1 procesarCadena
+A2 calcularYMostrar
+A3 Parar
+
+A0 Inicializar
+    cantidadPalabras <- 0
+    longitudMasLarga <- 0
+    longitudMasCorta <- 0
+    promedioCaracPorPalabra <- 0
+    porcentEspacios <- 0
+    longitudActual <- 0
+    cantidadEspacios <- 0
+    cantidadLetras <- 0
+    totalCaracteres <- 0
+    errorEncontrado <- falso
+
+A1 procesarCadena
+    Leer(caracter)
+    
+    mientras (caracter <> '.' & errorEncontrado = falso) Hacer
+        si (caracter = ' ') entonces
+            cantidadEspacios <- cantidadEspacios + 1
+            
+            // Solo procesamos una palabra si veníamos contando letras (Por el tema de los espacios multiples)
+            si (longitudActual > 0) entonces
+                cantidadPalabras <- cantidadPalabras + 1
+                
+                si (longitudActual > longitudMasLarga) entonces
+                    longitudMasLarga <- longitudActual
+                fin_si
+                
+                si (longitudMasCorta = 0 | longitudActual < longitudMasCorta) entonces
+                    longitudMasCorta <- longitudActual
+                fin_si
+                
+                longitudActual <- 0
+            fin_si
+        sino
+            // Verificamos que solo ingresen letras o numeros (Esto tengo)
+            si ((caracter >= 'a' & caracter <= 'z') | (caracter >= 'A' & caracter <= 'Z') | (caracter >= '0' & caracter <= '9') | caracter = 'ñ' | caracter = 'Ñ') entonces
+                longitudActual <- longitudActual + 1
+                cantidadLetras <- cantidadLetras + 1
+            sino
+                Escribir("Error: Caracter no permitido")
+                errorEncontrado <- verdadero
+            fin_si
+        fin_si
+        
+        si (errorEncontrado = falso) entonces
+            Leer(caracter)
+        fin_si
+    Fin_mientras
+
+    // Como al ultimo hay un "." teng que procesar la ultima palabra si es que hay una
+    si (errorEncontrado = falso & longitudActual > 0) entonces
+        cantidadPalabras <- cantidadPalabras + 1
+        
+        si (longitudActual > longitudMasLarga) entonces
+            longitudMasLarga <- longitudActual
+        fin_si
+        
+        si (longitudMasCorta = 0 | longitudActual < longitudMasCorta) entonces
+            longitudMasCorta <- longitudActual
+        fin_si
+    fin_si
+
+A2 calcularYMostrar
+    si (errorEncontrado = falso) entonces
+        totalCaracteres <- cantidadLetras + cantidadEspacios
+        
+        si (cantidadPalabras > 0) entonces
+            promedioCaracPorPalabra <- cantidadLetras / cantidadPalabras
+        fin_si
+        
+        si (totalCaracteres > 0) entonces
+            porcentEspacios <- (cantidadEspacios / totalCaracteres) * 100
+        fin_si
+        
+        Escribir("INFORME FINAL")
+        Escribir("Cantidad de palabras: ", cantidadPalabras)
+        Escribir("Longitud de la palabra más larga: ", longitudMasLarga)
+        Escribir("Longitud de la palabra más corta: ", longitudMasCorta)
+        Escribir("Promedio de caracteres por palabra: ", promedioCaracPorPalabra)
+        Escribir("Porcentaje de espacios sobre el total de caracteres: ", porcentEspacios, "%")
+    fin_si

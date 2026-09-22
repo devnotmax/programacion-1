@@ -1,0 +1,34 @@
+algoritmo registroTemperaturas
+Entradas: temperatura, superior: real
+Salidas: promedio: real, cantidadDiasSuperior: entero
+Variables auxiliares: sumaTemperaturas: real
+
+A0 inicializar
+A1 procesarTemperaturas
+A2 informarResultados
+A3 Parar
+
+A0 inicializar
+    promedio <- 0
+    cantidadDiasSuperior <- 0
+    sumaTemperaturas <- 0
+
+A1 procesarTemperaturas
+    leer(superior)
+    hacer 7 veces
+        leer(temperatura)
+        sumaTemperaturas <- sumaTemperaturas + temperatura
+        si (temperatura > superior) entonces
+            cantidadDiasSuperior <- cantidadDiasSuperior + 1
+        fin_si
+    fin_hacer
+
+    promedio <- sumaTemperaturas / 7
+
+A2 informarResultados
+    Escribir(promedio)
+    Escribir(cantidadDiasSuperior)
+
+
+
+
