@@ -1,0 +1,115 @@
+Algoritmo EstacionDeServicio
+Entradas: combustible, medioPago, opcion: caracter, litros: real
+Salidas: clientes: entero, litrosVendidos, recaudacion: real
+Variables auxiliares: valido: entero, total, monto, descuento: real
+
+funcion calcularVenta(combustible: caracter, litros: real, medioPago: caracter): real
+    monto <- 0
+    descuento <- 0
+
+    si (combustible = 'N') entonces
+        monto <- litros * 1500
+    sino
+        si (combustible = 'D') entonces
+            monto <- litros * 1300
+        fin_si
+    fin_si
+
+    si (litros > 30) entonces
+        descuento <- descuento + 3
+    fin_si
+
+    si (medioPago = 'E') entonces
+        descuento <- descuento + 10
+    sino
+        si (medioPago = 'B') entonces
+            descuento <- descuento + 5
+        sino
+            si (medioPago = 'T') entonces
+                descuento <- 0
+            fin_si
+        fin_si
+    fin_si
+
+    retornar monto - (monto * descuento) / 100
+fin_funcion
+
+procedimiento mostrarVenta(combustible: caracter, litros: real, medioPago: caracter, total: real)
+    escribir("Cantidad de litros cargados: ", litros)
+    
+    si (combustible = 'N') entonces
+        escribir("Tipo de combustible: Nafta")
+    sino
+        escribir("Tipo de combustible: Diesel")
+    fin_si
+
+    si (medioPago = 'E') entonces
+        escribir("Medio de pago: Efectivo (10% descuento)")
+    sino
+        si (medioPago = 'T') entonces
+            escribir("Medio de pago: Tarjeta (Sin descuentos)")
+        sino
+            escribir("Medio de pago: Billetera virtual (5% descuento)")
+        fin_si
+    fin_si
+
+    escribir("Total a pagar: $", total)
+fin_procedimiento
+
+procedimiento mostrarResumen(clientes: entero, litrosVendidos: real, recaudacion: real)
+    escribir("Cantidad de clientes atendidos: ", clientes)
+    escribir("Cantidad de litros vendidos: ", litrosVendidos)
+    escribir("Recaudacion total del dia: $", recaudacion)
+fin_procedimiento
+
+A0 inicializar
+    clientes <- 0
+    litrosVendidos <- 0
+    recaudacion <- 0
+
+A1 procesarVentas
+    hacer
+        valido <- 1
+        leer(combustible)
+
+        si (combustible != 'N' && combustible != 'D') entonces
+            escribir("Error: Tipo de combustible invalido.")
+            valido <- 0
+        fin_si
+
+        si (valido = 1) entonces
+            leer(litros)
+            
+            si (litros <= 0) entonces
+                escribir("Error: La cantidad de litros debe ser mayor a cero.")
+                valido <- 0
+            fin_si
+        fin_si
+
+        si (valido = 1) entonces
+            leer(medioPago)
+            
+            si (medioPago != 'E' && medioPago != 'T' && medioPago != 'B') entonces
+                escribir("Error: Medio de pago invalido.")
+                valido <- 0
+            fin_si
+        fin_si
+
+        si (valido = 1) entonces
+            total <- calcularVenta(combustible, litros, medioPago)
+            mostrarVenta(combustible, litros, medioPago, total)
+            
+            clientes <- clientes + 1
+            litrosVendidos <- litrosVendidos + litros
+            recaudacion <- recaudacion + total
+        sino
+            escribir("Venta cancelada por error de ingreso.")
+        fin_si
+
+        leer(opcion)
+        
+    mientras (opcion = 's' || opcion = 'S')
+
+    mostrarResumen(clientes, litrosVendidos, recaudacion)
+
+A2 Parar

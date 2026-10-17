@@ -1,0 +1,69 @@
+algoritmo procesamientoCaracteres
+Entradas: c: caracter
+Salidas: cantidadLetras, cantidadVocales, cantidadConsonantes, cantidadDigitosPares, cantidadDigitosImpares, cantidadEspacios, cantidadOtros: entero
+Variables auxiliares: anterior: caracter
+
+funcion esVocal(c: caracter): entero
+    si (c = 'a' || c = 'e' || c = 'i' || c = 'o' || c = 'u') entonces
+        retornar 1
+    sino
+        retornar 0
+    fin_si
+fin_funcion
+
+funcion esDigitoPar(digito: caracter): entero
+    si(digito % 2 = 0) entonces
+        retornar 1
+    sino
+        retornar 0
+    fin_si
+fin_funcion
+
+procedimiento mostrarResumen(letras, vocales, consonantes, digitosPares, digitosImpares, espacios, otros): entero, entero, entero, entero, entero, entero, entero
+    Escribir(letras)
+    Escribir(vocales)
+    Escribir(consonantes)
+    Escribir(digitosPares)
+    Escribir(digitosImpares)
+    Escribir(espacios)
+    Escribir(otros)
+fin_procedimiento
+
+A0 inicializar
+    cantidadLetras <- 0
+    cantidadVocales <- 0
+    cantidadConsonantes <- 0
+    cantidadDigitosPares <- 0
+    cantidadDigitosImpares <- 0
+    cantidadEspacios <- 0
+    cantidadOtros <- 0
+
+A1 procesarCadena
+    Leer(c)
+    mientras (c <> '.') hacer
+        cantidadLetras <- cantidadLetras + 1
+        si (esVocal(c) = 1) entonces
+            cantidadVocales <- cantidadVocales + 1
+        sino
+            cantidadConsonantes <- cantidadConsonantes + 1
+        fin_si
+
+        si (c >= '0' && c <= '9') entonces
+            si (esDigitoPar(c) = 1) entonces
+                cantidadDigitosPares <- cantidadDigitosPares + 1
+            sino
+                cantidadDigitosImpares <- cantidadDigitosImpares + 1
+            fin_si
+        sino si (c = ' ') entonces
+            cantidadEspacios <- cantidadEspacios + 1
+        sino
+            cantidadOtros <- cantidadOtros + 1
+        fin_si
+
+        Leer(c)
+    fin_mientras
+
+A2 mostrarResultados
+    mostrarResumen(cantidadLetras, cantidadVocales, cantidadConsonantes, cantidadDigitosPares, cantidadDigitosImpares, cantidadEspacios, cantidadOtros)
+
+A3 Parar

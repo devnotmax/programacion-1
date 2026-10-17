@@ -1,0 +1,54 @@
+algoritmo conversorTemperaturas
+
+Entradas: opcionElegida: entero, temperaturaCelsius, temperaturaFahrenheit: real
+Salidas: temperaturaConvertida: real
+Variables auxiliares: opcionValida: entero
+
+procedimiento mostrarMenu
+    Escribir("-- Conversor de Temperaturas --")
+    Escribir("1 - Celsius a Fahrenheit")
+    Escribir("2 - Fahrenheit a Celsius")
+    Escribir("3 - Cerrar programa")
+    Escribir("----------------------------------")
+fin_procedimiento
+
+
+funcion celsiusAFahrenheit(celsius: real): real
+    retornar celsius * 9 / 5 + 32
+fin_funcion
+
+
+funcion fahrenheitACelsius(fahrenheit: real): real
+    retornar (fahrenheit - 32) * 5 / 9
+fin_funcion
+
+A0 inicializar
+    opcionValida <- 1
+
+A1 procesarConversion
+    hacer mientras (opcionValida = 1)
+        procedimiento mostrarMenu
+        leer(opcionElegida)
+
+        segun (opcionElegida) hacer
+
+            caso 1:
+                leer(temperaturaCelsius)
+                temperaturaConvertida <- celsiusAFahrenheit(temperaturaCelsius)
+                Escribir(temperaturaConvertida)
+
+            caso 2:
+                leer(temperaturaFahrenheit)
+                temperaturaConvertida <- fahrenheitACelsius(temperaturaFahrenheit)
+                Escribir(temperaturaConvertida)
+
+            caso 3:
+                opcionValida <- 0
+
+            defecto:
+                Escribir("Opcion no valida")
+
+        fin_segun
+    fin_mientras
+
+A2 Parar

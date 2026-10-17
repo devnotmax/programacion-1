@@ -1,0 +1,29 @@
+Algoritmo distanciaEntrePuntos
+Entradas: x1, y1, x2, y2: reales, opcion: caracter
+Salidas: resultado: real
+Variables auxiliares: dx, dy: reales
+
+funcion distancia(x1: real, y1: real, x2: real, y2: real): real
+    dx <- x2 - x1
+    dy <- y2 - y1
+
+    retornar raiz(cuadrado(dx) + cuadrado(dy))
+fin_funcion
+
+A0 inicializar
+    resultado <- 0
+
+A1 calcularDistancia
+    hacer
+        leer(x1)
+        leer(y1)
+        leer(x2)
+        leer(y2)
+
+        resultado <- distancia(x1, y1, x2, y2)
+        escribir(resultado)
+
+        leer(opcion)
+    mientras (opcion = 's' || opcion = 'S')
+
+A2 Parar
