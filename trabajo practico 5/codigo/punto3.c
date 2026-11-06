@@ -126,6 +126,47 @@ int sumarElementos(int m[MAX][MAX], int filas, int columnas)
     return contador;
 }
 
-int puestoMasVendedor(int m[MAX][MAX], int filas, int columnas){
-    //Tiene que devolver el indice buscado.
+int puestoMasVendedor(int m[MAX][MAX], int filas, int columnas)
+{
+    // Tiene que devolver el indice buscado.
+    int indiceMasBuscado = 0;
+    int mejorVentas = 0;
+    for (int i = 0; i < filas; i++)
+    {
+        int ventasDelPuesto = 0;
+        for (int j = 0; j < columnas; j++)
+        {
+            ventasDelPuesto += m[i][j];
+        }
+
+        if (ventasDelPuesto > mejorVentas)
+        {
+            mejorVentas = ventasDelPuesto;
+            indiceMasBuscado = i;
+        }
+    }
+
+    return indiceMasBuscado;
+}
+
+int productoMasVendido(int m[MAX][MAX], int filas, int columnas)
+{
+    int indiceMasBuscado = 0;
+    int mejorVentas = -1;
+    for (int i = 0; i < filas; i++)
+    {
+        int totalDelProducto = 0;
+        for (int j = 0; j < columnas; j++)
+        {
+            totalDelProducto += m[i][j];
+        }
+
+        if (totalDelProducto > mejorVentas)
+        {
+            mejorVentas = totalDelProducto;
+            indiceMasBuscado = i; // Guardamos el índice de la columna (el producto)
+        }
+    }
+
+    return indiceMasBuscado; // Devolvemos el índice del producto ganador
 }
