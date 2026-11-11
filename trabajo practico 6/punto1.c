@@ -16,19 +16,9 @@ int main()
     do
     {
         printf("Ingrese la cantidad de elementos: ");
+        scanf("%d", &n);
 
-        if (scanf("%d", &n) != 1)
-        {
-            printf("Error: Debe ingresar un numero entero.\n");
-
-            int c;
-            while ((c = getchar()) != '\n' && c != EOF)
-            {
-            }
-
-            n = 0;
-        }
-        else if (n <= 1)
+        if (n <= 1)
         {
             printf("Error: La cantidad debe ser mayor que 1.\n");
         }
@@ -74,24 +64,8 @@ void cargarArreglo(int cantidad, int *arreglo)
 {
     for (int i = 0; i < cantidad; i++)
     {
-        int leidos;
-
-        do
-        {
-            printf("Ingrese el elemento %d: ", i + 1);
-            leidos = scanf("%d", &arreglo[i]);
-
-            if (leidos != 1)
-            {
-                printf("Error: Debe ingresar un numero entero valido.\n");
-
-                int c;
-                while ((c = getchar()) != '\n' && c != EOF)
-                {
-                }
-            }
-
-        } while (leidos != 1);
+        printf("Ingrese el elemento %d: ", i + 1);
+        scanf("%d", &arreglo[i]);
     }
 }
 
