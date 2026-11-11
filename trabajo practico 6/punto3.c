@@ -61,7 +61,7 @@ void cargarTiros(int *puntos, int tiros)
         switch (*puntos)
         {
         case 10:
-            // La boca de la vieja tiene un premio de $5000
+            // La boca de la vieja xd tiene un premio de $5000
             printf("Resultado: BOCA DE LA VIEJA!\n");
             printf("Premio: $5000\n");
             break;
@@ -86,7 +86,7 @@ void cargarTiros(int *puntos, int tiros)
             break;
 
         default:
-            // El 0 no tiene premio
+            // El 0 no tiene premio y encima perdes plata
             printf("Resultado: SIN PREMIO\n");
             printf("Perdida: -$500\n");
             break;
